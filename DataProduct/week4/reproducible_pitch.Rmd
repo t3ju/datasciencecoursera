@@ -1,0 +1,53 @@
+---
+title: "Developing Data Products<br>Course Project<br>Week 4"
+author: "Tejpal Jangir"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Synopsis
+
+This project was created for the Developing Data Products course as part of the
+Data Science Specialization offered through Coursera from Johns Hopkins
+University.
+
+The source code files for this project can be found on GitHub:
+
+<a target="_blank" href="https://github.com/oraclejavanet/developing-data-products-course-project-3">https://github.com/oraclejavanet/developing-data-products-course-project-3</a>
+
+## Course Project
+
+The course project is a two part peer-graded assignment:
+
+- Create a Shiny application and deploy it on RStudio's servers
+
+- Use Slidify or RStudio Presenter to prepare a reproducible pitch presentation
+about your application.
+
+The name of the Shiny application developed for this project is the
+**Motor Trend Data Analysis Application** and is hosted on RStudio's
+shinyapps.io hosted service:
+
+<a target="_blank" href="https://jhunter.shinyapps.io/develop-data-products-week-4-project/">https://jhunter.shinyapps.io/develop-data-products-week-4-project/</a>
+
+## Motor Trend Data Analysis Application
+
+**Motor Trend Data Analysis** is an interactive Shiny application that uses
+linear regression modeling techniques to estimate fuel consumption (MPG) in 32
+automobiles (1973-74 models) based on 11 aspects of automobile design and
+performance.
+
+## About the Data Set
+
+The mtcars dataset is comprised of data that was was extracted from the 1974
+Motor Trend US magazine, and comprises fuel consumption and 11 aspects of
+automobile design and performance for 32 automobiles (1973-74 models).
+
+The mtcars dataset is a data frame with 32 observations on 11 (numeric)
+variables.
