@@ -1,0 +1,76 @@
+---
+title: "Final Capstone Project Presentation"
+author: "Tejpal Jangir"
+date: "22nd July 2023"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Overview
+This project was the final part of a 10 course Data Science track by Johns Hopkins University on Coursera. It was done as an industry partnership with SwiftKey. The job was to clean and analyze a large corpus of unstructured text and build a word prediction model and use it in a web application.
+
+**Word Predictor Application:**  https://t3ju.shinyapps.io/nextword/
+**Repository:** https://github.com/samaaessa/Data-Science-Capstone-Final-Project/
+
+The goal of this exercise is to create a product to highlight the prediction algorithm that I have built and to provide an interface that can be accessed by others. For this project must submit:
+
+1. A Shiny app that takes as input a phrase (multiple words) in a text box input and outputs a prediction of the next word.
+2. A slide deck consisting of no more than 5 slides created with R Studio Presenter 
+
+
+## Data
+
+The data is from a corpus called HC Corpora. It consists of text files collected from publicly available sources by a web crawler. I used English language files that were gathered from Twitter and different blogs and news sources. This combination should give a rather good mix of general language used today.The data are large text files. Over 4 million lines combined. Unix word count gives 102,081,616 individual words. They are not in a sequential order, eg. the lines in the “Blogs” - file are not complete posts and the same post does not continue in the next line.
+
+## Text Transformations
+
+The process of transforming raw text to useful units for text analysis is called tokenization. What kind of transformations are needed is an important choice. In the case of word prediction, it's probably the most important step.
+
+## used list of transformations:
+
+- Word Stemming
+    - In many NLP tasks you stem the words, which means reducing inflected or derived word to its basic part (ie. connection, connected and connecting, would all become connect)
+- All text to lower case
+    - Removes the problem of beginning of sentence words being “different” than the others.
+- Remove numbers
+    - Remove tokens that consist only of numbers, but not words that start with digits, e.g. 2day)
+    - Numbers are hard to predict or use in word prediction
+  
+
+
+Continued
+--- 
+  
+- Remove punctuation
+    - With simple ngram-model punctuation causes too many sequences
+    - Could be useful with advanced algorithms combined with other features
+- Remove separators
+    - Spaces and variations of spaces, plus tab, newlines, and anything else in the Unicode “separator” category
+    - No use for prediction
+- Remove Twitter characters
+    - ie.(@ and #)
+    - Better to capture only the words
+    
+
+## Prediction Model
+To keep the scope of the project manageable, I only cosidered so called Markov models. They are a class of probabilistic models that assume we can predict the probability of some future unit without looking too far into the past. I based my model on the stupid backoff -algorithm. Despite its name, it actually performs quite well given very large data. Actually, almost as well as some more complex models.
+
+Stupid backoff -algorithm centers around n-grams. They mean contiguous word sequences of length n. Selection of the size depends on the genre of text you are trying to predict. Higher n-grams are not always preferable for prediction. Also the computing and storage needs grow exponentially with that parameter. I chose to let user choose n-grams of length one, two and three,... up to twenty. This means that the predictions can be based on maximum 19 previous words.
+
+
+
+**Basic Idea of the Algorithm used:**
+*for example if n = 3*
+
+1. Take the input and use the same text transformations as for the training data and return last two words.
+2. Search for two first input words in the 3-grams training data and if matched, predict the third word. If no match, then next step.
+3. Search with only the last input word in the first word of 2-grams training data. If matched, predict the second word. If no match, then next step.
+4. Predict the most common words in the 1-gram data.
+
+Thanks
+=======================================================
